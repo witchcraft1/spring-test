@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<!--    <link th:href="@{public/css/style.css}" th:rel="stylesheet">-->
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default" style="margin-top:45px">
+                <div class="panel-heading">
+                    <h3 class="panel-title" th:text="Регистрация"></h3>
+                </div>
+
+                <div class="panel-body" th:each="order : ${orders}">
+                    <div th:text="${order.description}"></div>
+                    <div th:text="${order.orderStatus}"></div>
+                    <div th:text="${order.workPrice}"></div>
+                    <div th:text="${order.registerDate}"></div>
+                    <div th:text="${order.master != null} ?
+                        ${order.master.username} : 'Master havent been assigned'"></div>
+                    <div th:if="${order.workPrice}">
+                        <form th:action = "@{/orders/pay/{id}(id=${order.id})}" th:method="put" >
+<!--                        <a href="/orders/pay/{order.id}"></a>-->
+                            <button type="submit" class="btn btn-success" th:text="Оплатить"></button>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <a href="/orders/create" class="btn btn-primary" th:text="Create_new_order"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

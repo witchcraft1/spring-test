@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link th:href="@{public/css/style.css}" th:rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default" style="margin-top:45px">
+                <div class="panel-heading">
+                    <h3 class="panel-title" th:text="Bill_details"></h3>
+                </div>
+
+                <div class="panel-body" th:object="${billDeatils}">
+                    <div th:text="*{id}"></div>
+                    <div th:text="*{credit_cart_details}"></div>
+                    <div th:text="*{cashAvailable}"></div>
+                    <div th:text="*{cashSpent}"></div>
+                    <form th:action = "@{/bill/update}" th:method="put" th:object="${billDto}">
+                        <!--                            <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden">-->
+                        <div class="form-group">
+                            <label for="description" th:text="write_new_description"></label>
+                            <input type="text" class="form-control" id="description" th:placeholder="description"
+                                   name="description" th:field="*{description}" required pattern="\w{5,99}">
+                        </div>
+                        <button type="submit" class="btn btn-success" th:text="Accept"></button>
+                    </form>
+                </div>
+                <div>
+                    <a href="/orders/create" class="btn btn-primary" th:text="Create_new_order"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
